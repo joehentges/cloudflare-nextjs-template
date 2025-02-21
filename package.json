@@ -3,25 +3,48 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev --turbopack",
+    "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "format": "prettier --write src//**/*.{ts,tsx}",
+    "build:prod": "pnpm run opennext:build && wrangler deploy --dry-run --outdir=dist",
+    "opennext:build": "export SKIP_LINTER=false && opennextjs-cloudflare",
+    "build:analyze": "ANALYZE=true next build",
+    "deploy": "pnpm run opennext:build && wrangler deploy",
+    "preview": "pnpm run opennext:build && wrangler dev",
+    "cf-typegen": "wrangler types --env-interface CloudflareEnv cloudflare-env.d.ts",
+    "db:generate": "drizzle-kit generate --name",
+    "db:migrate:dev": "wrangler d1 migrations apply $(node scripts/get-db-name.mjs) --local"
   },
   "dependencies": {
+    "@t3-oss/env-nextjs": "^0.12.0",
+    "class-variance-authority": "^0.7.1",
+    "clsx": "^2.1.1",
+    "drizzle-orm": "^0.39.3",
+    "lucide-react": "^0.475.0",
+    "next": "15.2.0-canary.67",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
-    "next": "15.2.0-canary.67"
+    "tailwind-merge": "^3.0.1",
+    "tailwindcss-animate": "^1.0.7",
+    "zod": "^3.24.2"
   },
   "devDependencies": {
-    "typescript": "^5",
+    "@eslint/eslintrc": "^3",
+    "@ianvs/prettier-plugin-sort-imports": "^4.4.1",
+    "@next/bundle-analyzer": "^15.1.7",
+    "@opennextjs/cloudflare": "^0.5.3",
+    "@tailwindcss/postcss": "^4",
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
-    "@tailwindcss/postcss": "^4",
-    "tailwindcss": "^4",
+    "drizzle-kit": "^0.30.4",
     "eslint": "^9",
     "eslint-config-next": "15.2.0-canary.67",
-    "@eslint/eslintrc": "^3"
+    "prettier": "^3.5.1",
+    "prettier-plugin-tailwindcss": "^0.6.11",
+    "tailwindcss": "^4",
+    "typescript": "^5"
   }
 }

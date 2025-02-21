@@ -1,7 +1,24 @@
-import type { NextConfig } from "next";
+import withBundleAnalyzer from "@next/bundle-analyzer"
+import { initOpenNextCloudflareForDev } from "@opennextjs/cloudflare"
 
-const nextConfig: NextConfig = {
-  /* config options here */
-};
+// added by create cloudflare to enable calling `getCloudflareContext()` in `next dev`
+initOpenNextCloudflareForDev()
 
-export default nextConfig;
+// TODO cache-control headers don't work for static files
+/** @type {import('next').NextConfig} */
+const nextConfig = {
+  experimental: {
+    typedRoutes: true,
+  },
+  eslint: {
+    ignoreDuringBuilds: process.env.SKIP_LINTER === "true",
+  },
+  typescript: {
+    ignoreBuildErrors: process.env.SKIP_LINTER === "true",
+  },
+}
+
+// eslint-disable-next-line import/no-unused-modules
+export default process.env.ANALYZE === "true"
+  ? withBundleAnalyzer()(nextConfig)
+  : nextConfig
