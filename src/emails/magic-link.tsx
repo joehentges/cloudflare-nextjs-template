@@ -17,14 +17,8 @@ import { siteConfig } from "@/config/site"
 
 const HOST_NAME = env.HOST_NAME
 
-export function MagicLinkEmail({
-  token,
-  from
-}: {
-  token: string
-  from?: string
-}) {
-  const magicLinkHref = `${HOST_NAME}/api/auth/magic?token=${token}${from ? `&from=${from}` : ""}`
+export function MagicLinkEmail({ token }: { token: string }) {
+  const magicLinkHref = `${HOST_NAME}/api/auth/magic?token=${token}`
   return (
     <Html>
       <Head />

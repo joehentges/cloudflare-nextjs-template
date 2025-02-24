@@ -40,14 +40,10 @@ export async function sendResetPasswordEmail(email: string, token: string) {
   )
 }
 
-export async function sendMagicLinkEmail(
-  email: string,
-  token: string,
-  from?: string
-) {
+export async function sendMagicLinkEmail(email: string, token: string) {
   await sendEmail(
     email,
     `Your magic link link for ${siteConfig.name}`,
-    <MagicLinkEmail token={token} from={from} />
+    <MagicLinkEmail token={token} />
   )
 }

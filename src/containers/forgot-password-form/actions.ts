@@ -13,13 +13,11 @@ import { rateLimitByKey } from "@/lib/limiter"
 import { unauthenticatedAction } from "@/lib/safe-action"
 import { sendResetPasswordEmail } from "@/lib/send-email"
 
+import { forgotPasswordFormSchema } from "./validation"
+
 export const sendForgotPasswordAction = unauthenticatedAction
   .createServerAction()
-  .input(
-    z.object({
-      email: z.string().email()
-    })
-  )
+  .input(forgotPasswordFormSchema)
   .handler(async ({ input }) => {
     await rateLimitByKey({
       key: `${input.email}-send-forgot-password`,
@@ -28,6 +26,7 @@ export const sendForgotPasswordAction = unauthenticatedAction
     })
 
     const database = getDatabase()
+
     const user = await database.query.userTable.findFirst({
       where: eq(userTable.email, input.email)
     })
@@ -42,7 +41,7 @@ export const sendForgotPasswordAction = unauthenticatedAction
     // Save verification token in KV with expiration
     const { env } = getCloudflareContext()
     await env.NEXT_CACHE_WORKERS_KV.put(
-      `forgot-password:${verificationToken}`,
+      `password-reset:${verificationToken}`,
       JSON.stringify({
         userId: user.id,
         expiresAt: expiresAt.toISOString()

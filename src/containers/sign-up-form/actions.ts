@@ -65,7 +65,6 @@ export const signUpAction = unauthenticatedAction
     const verificationToken = createId()
     const expiresAt = new Date(Date.now() + EMAIL_TTL)
 
-    // Save verification token in KV with expiration
     const { env } = getCloudflareContext()
     await env.NEXT_CACHE_WORKERS_KV.put(
       `email-verification:${verificationToken}`,
