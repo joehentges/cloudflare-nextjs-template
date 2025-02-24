@@ -7,9 +7,6 @@ initOpenNextCloudflareForDev()
 // TODO cache-control headers don't work for static files
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  experimental: {
-    typedRoutes: true,
-  },
   eslint: {
     ignoreDuringBuilds: process.env.SKIP_LINTER === "true",
   },

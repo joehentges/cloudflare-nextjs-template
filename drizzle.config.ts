@@ -26,19 +26,19 @@ function getLocalD1DB() {
 export default defineConfig({
   schema: "./src/db/schemas",
   dialect: "sqlite",
-  out: "./drizzle",
+  out: "./src/db/migrations",
   ...(process.env.NODE_ENV === "production"
     ? {
         driver: "d1-http",
         dbCredentials: {
           accountId: process.env.CLOUDFLARE_ACCOUNT_ID,
           databaseId: process.env.DATABASE_ID,
-          token: process.env.CLOUDFLARE_API_TOKEN,
-        },
+          token: process.env.CLOUDFLARE_API_TOKEN
+        }
       }
     : {
         dbCredentials: {
-          url: getLocalD1DB(),
-        },
-      }),
+          url: getLocalD1DB()
+        }
+      })
 })

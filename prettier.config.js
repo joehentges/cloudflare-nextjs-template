@@ -5,7 +5,7 @@ module.exports = {
   semi: false,
   singleQuote: false,
   tabWidth: 2,
-  trailingComma: "es5",
+  trailingComma: "none",
   importOrder: [
     "^(react/(.*)$)|^(react$)",
     "^(next/(.*)$)|^(next$)",
@@ -30,14 +30,15 @@ module.exports = {
     "^@/components/ui/(.*)$",
     "^@/components/(.*)$",
     "^@/hooks/(.*)$",
+    "^@/emails/(.*)$",
     "^@/styles/(.*)$",
     "^@/app/(.*)$",
     "",
-    "^[./]",
+    "^[./]"
   ],
   importOrderParserPlugins: ["typescript", "jsx", "decorators-legacy"],
   plugins: [
     "@ianvs/prettier-plugin-sort-imports",
-    "prettier-plugin-tailwindcss",
-  ],
+    "prettier-plugin-tailwindcss"
+  ]
 }
