@@ -1,4 +1,4 @@
-import { parseWranglerConfig } from "./utils/parse-wrangler.mjs"
+import { parseWranglerConfig } from "./parse-wrangler.mjs"
 
 try {
   const config = parseWranglerConfig()
