@@ -4,7 +4,7 @@ CREATE TABLE `user` (
 	`updated_at` integer NOT NULL,
 	`first_name` text(255),
 	`last_name` text(255),
-	`email` text(255),
+	`email` text(255) NOT NULL,
 	`password_hash` text,
 	`role` text DEFAULT 'user' NOT NULL,
 	`email_verified` integer,

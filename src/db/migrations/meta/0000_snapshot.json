@@ -1,7 +1,7 @@
 {
   "version": "6",
   "dialect": "sqlite",
-  "id": "3ea560f2-a449-4f5e-8931-1fbb375998d2",
+  "id": "513da709-d96e-4519-8593-f1c68654441e",
   "prevId": "00000000-0000-0000-0000-000000000000",
   "tables": {
     "user": {
@@ -46,7 +46,7 @@
           "name": "email",
           "type": "text(255)",
           "primaryKey": false,
-          "notNull": false,
+          "notNull": true,
           "autoincrement": false
         },
         "password_hash": {
