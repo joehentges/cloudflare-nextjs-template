@@ -10,7 +10,7 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url))
  * @throws {Error} If the file cannot be read or parsed
  */
 export function parseWranglerConfig() {
-  const wranglerPath = path.join(__dirname, "..", "..", "wrangler.jsonc")
+  const wranglerPath = path.join(__dirname, "..", "wrangler.jsonc")
   const wranglerContent = fs.readFileSync(wranglerPath, "utf8")
 
   // Remove comments from the JSONC content
